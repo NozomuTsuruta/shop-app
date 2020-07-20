@@ -3,25 +3,22 @@ import React, { FC, ChangeEvent } from 'react';
 import './form-input.styles.scss';
 
 type Props = {
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   label: string;
   value: string;
-  required: boolean;
+  required?: boolean;
   type: string;
 };
 
-const FormInput: FC<Props> = ({ handleChange, label, value, required, type }) => {
+const FormInput: FC<Props> = ({ label,...otherProps }) => {
   return (
     <div className='group'>
       <input
         className='form-input'
-        onChange={handleChange}
-        required={required}
-        value={value}
-        type={type}
+        {...otherProps}
       />
       {label ? (
-        <label className={`${value.length ? 'shrink' : ''} form-input-label`}>
+        <label className={`${otherProps.value.length ? 'shrink' : ''} form-input-label`}>
           {label}
         </label>
       ) : null}

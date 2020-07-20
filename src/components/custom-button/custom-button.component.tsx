@@ -1,16 +1,17 @@
-import React, { ReactNode, FC, FormEvent } from 'react';
+import React, { ReactNode, FC } from 'react';
 
 import './custom-button.styles.scss';
 
 type Props = {
   children: ReactNode;
-  handleSubmit: (e: FormEvent) => void;
-  type: 'button' | 'submit' | 'reset' | undefined;
+  onClick?: () => Promise<firebase.auth.UserCredential>;
+  type?: 'button' | 'submit' | 'reset' | undefined;
+  isGoogleSignIn?: boolean;
 };
 
-const CustomButton: FC<Props> = ({ children, handleSubmit, type }) => {
+const CustomButton: FC<Props> = ({ children,isGoogleSignIn, ...otherProps }) => {
   return (
-    <button className='custom-button' type={type} onSubmit={handleSubmit}>
+    <button className={`${isGoogleSignIn? 'google-sign-in': ''} custom-button`} {...otherProps}>
       {children}
     </button>
   );
