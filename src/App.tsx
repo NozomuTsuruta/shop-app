@@ -4,27 +4,31 @@ import HomePage from './pages/homepage/homepage.component';
 import { Route, Switch } from 'react-router-dom';
 import Shop from './pages/shop/shop.component';
 import Header from './components/header/header.component';
-import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sigin-in-and-sign-up.component';
-import { auth } from './firebase/firebase.utils';
-import { User } from 'firebase';
+import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
+import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
 function App() {
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [currentUser, setCurrentUser] = useState<any>(null);
 
   useEffect(() => {
-    const unsubscribeFromAuth = auth.onAuthStateChanged((user) => {
-      setCurrentUser(user);
+    const unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
 
-      console.log(user);
-      return () => {
-        unsubscribeFromAuth();
-      };
+        userRef.onSnapshot((snapshot) => {
+          setCurrentUser({ id: snapshot.id, ...snapshot.data() });
+        });
+      }
+      setCurrentUser(userAuth);
     });
+    return () => {
+      unsubscribeFromAuth();
+    };
   }, []);
 
   return (
     <div>
-      <Header currentUser={currentUser}/>
+      <Header currentUser={currentUser} />
       <Switch>
         <Route exact path='/' component={HomePage} />
         <Route path='/shop' component={Shop} />

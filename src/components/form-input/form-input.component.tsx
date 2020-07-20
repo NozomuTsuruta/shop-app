@@ -7,7 +7,7 @@ type Props = {
   label: string;
   value: string;
   required?: boolean;
-  type: string;
+  type?: string;
 };
 
 const FormInput: FC<Props> = ({ label,...otherProps }) => {
