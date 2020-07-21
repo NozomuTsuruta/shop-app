@@ -1,17 +1,19 @@
-import React, { FC } from 'react';
+import React from 'react';
 
 import './header.styles.scss';
 
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import { Link } from 'react-router-dom';
-import { User } from 'firebase';
 import { auth } from './../../firebase/firebase.utils';
+import { useSelector } from 'react-redux';
+import { rootState } from '../../redux/root-reducer';
+import CartIcon from '../cart-icon/cart-icon.component';
+import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 
-type Props = {
-  currentUser: User | null;
-};
+const Header = () => {
+  const currentUser = useSelector((state: rootState) => state.user.currentUser);
+  const hidden = useSelector((state: rootState) => state.cart.hidden);
 
-const Header: FC<Props> = ({ currentUser }) => {
   return (
     <div className='header'>
       <Link className='logo-container' to='/'>
@@ -33,7 +35,9 @@ const Header: FC<Props> = ({ currentUser }) => {
             SIGN IN
           </Link>
         )}
+        <CartIcon />
       </div>
+      {hidden ? null : <CartDropdown />}
     </div>
   );
 };
