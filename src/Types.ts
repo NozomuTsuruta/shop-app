@@ -3,4 +3,12 @@ export type Item = {
   name: string;
   imageUrl: string;
   price: number;
+  quantity?: number|any;
+};
+
+export type Profile = {
+  createdAt: Date;
+  displayName: string;
+  email: string;
+  id: string;
 };

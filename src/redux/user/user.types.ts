@@ -1,5 +1,5 @@
-import { User } from 'firebase';
 import { Action } from 'redux';
+import { Profile } from '../../Types';
 
 export const ActionTypes = {
   setUser: 'SET_USER',
@@ -7,17 +7,17 @@ export const ActionTypes = {
 } as const;
 
 export type UserTypes = {
-  currentUser: User | null;
+  currentUser: Profile | null;
 };
 
 interface SetUserAction extends Action {
   type: typeof ActionTypes.setUser;
-  payload: User | null;
+  payload: Profile | null;
 }
 
 interface ClearUserAction extends Action {
   type: typeof ActionTypes.clearUser;
-  payload: User | null;
+  payload: Profile | null;
 }
 
 export type UserActionTypes = SetUserAction | ClearUserAction;
