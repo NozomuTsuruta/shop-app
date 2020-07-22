@@ -8,11 +8,12 @@ import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { setUser } from './redux/user/user.actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { rootState } from './redux/root-reducer';
+import { selectCurrentUser } from './redux/user/user.selectors';
+import Checkout from './pages/checkout/checkout.component';
 
 function App() {
   const dispatch = useDispatch();
-  const currentUser = useSelector((state: rootState) => state.user.currentUser);
+  const currentUser = useSelector(selectCurrentUser);
 
   useEffect(() => {
     const unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
@@ -35,6 +36,7 @@ function App() {
       <Switch>
         <Route exact path='/' component={HomePage} />
         <Route path='/shop' component={Shop} />
+        <Route exact path='/checkout' component={Checkout} />
         <Route
           path='/signin'
           render={() =>
