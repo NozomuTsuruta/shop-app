@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import './collection-item.styles.scss';
 import { Item } from '../../Types';
 import CustomButton from '../custom-button/custom-button.component';
-import { addItem } from '../../redux/cart/cart.action';
+import { addItem } from '../../redux/cart/cart.actions';
 import { useDispatch } from 'react-redux';
 
 type Props = {
