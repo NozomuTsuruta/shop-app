@@ -12,3 +12,10 @@ export type Profile = {
   email: string;
   id: string;
 };
+
+export type ShopTypes = {
+  id: number;
+  title: string;
+  routeName: string;
+  items: Item[];
+}

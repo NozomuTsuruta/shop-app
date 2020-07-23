@@ -8,11 +8,11 @@ import { selectCartItems } from '../../redux/cart/cart.selectors';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { toggleCartHidden } from '../../redux/cart/cart.actions';
 
-interface Props extends RouteComponentProps {}
+type Props = {} & RouteComponentProps;
 
 const CartDropdown: FC<Props> = ({ history }) => {
   const cartItems = useSelector(selectCartItems);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   return (
     <div className='cart-dropdown'>
@@ -28,7 +28,7 @@ const CartDropdown: FC<Props> = ({ history }) => {
       <CustomButton
         onClick={() => {
           history.push('/checkout');
-          dispatch(toggleCartHidden())
+          dispatch(toggleCartHidden());
         }}
       >
         GO TO CHECKOUT
