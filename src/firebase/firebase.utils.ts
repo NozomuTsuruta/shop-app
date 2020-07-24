@@ -1,6 +1,7 @@
 import firebase, { User } from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
+import { ShopTypes } from '../Types';
 
 const config = {
   apiKey: 'AIzaSyBWn-MYGeZ15dmS_G-yYpo9oKG-wEk1L68',
@@ -13,8 +14,10 @@ const config = {
   measurementId: 'G-MG9H55FBTG',
 };
 
-export const createUserProfileDocument = async (userAuth: User, additionalData?: any) => {
-
+export const createUserProfileDocument = async (
+  userAuth: User,
+  additionalData?: any
+) => {
   const userRef = firestore.doc(`users/${userAuth.uid}`);
 
   const snapshot = await userRef.get();
@@ -35,6 +38,22 @@ export const createUserProfileDocument = async (userAuth: User, additionalData?:
     }
   }
   return userRef;
+};
+
+export const addCollectionAndDocuments = async (
+  collectionKey: string,
+  objectsToAdd: any
+) => {
+  const collectionRef = firestore.collection(collectionKey);
+  console.log(objectsToAdd)
+
+  const batch = firestore.batch();
+  objectsToAdd.forEach((obj:any) => {
+    const newDocRef = collectionRef.doc();
+    batch.set(newDocRef, obj);
+  });
+
+  return await batch.commit();
 };
 
 firebase.initializeApp(config);

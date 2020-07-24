@@ -5,7 +5,10 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import Shop from './pages/shop/shop.component';
 import Header from './components/header/header.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
-import { auth, createUserProfileDocument } from './firebase/firebase.utils';
+import {
+  auth,
+  createUserProfileDocument,
+} from './firebase/firebase.utils';
 import { setUser } from './redux/user/user.actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCurrentUser } from './redux/user/user.selectors';
@@ -24,6 +27,7 @@ function App() {
           dispatch(setUser({ id: snapshot.id, ...snapshot.data() }));
         });
       }
+
     });
     return () => {
       unsubscribeFromAuth();

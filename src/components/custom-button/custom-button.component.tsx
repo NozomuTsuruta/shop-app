@@ -1,6 +1,6 @@
 import React, { ReactNode, FC } from 'react';
 
-import './custom-button.styles.scss';
+import { CustomButtonContainer } from './custom-button.styles';
 
 type Props = {
   children: ReactNode;
@@ -12,19 +12,10 @@ type Props = {
 
 const CustomButton: FC<Props> = ({
   children,
-  isGoogleSignIn,
-  inverted,
   ...otherProps
 }) => {
   return (
-    <button
-      className={`${inverted ? 'inverted' : ''} ${
-        isGoogleSignIn ? 'google-sign-in' : ''
-      } custom-button`}
-      {...otherProps}
-    >
-      {children}
-    </button>
+    <CustomButtonContainer {...otherProps}>{children}</CustomButtonContainer>
   );
 };
 
