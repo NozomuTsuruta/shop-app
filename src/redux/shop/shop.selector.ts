@@ -3,7 +3,7 @@ import { rootState } from '../root-reducer';
 
 const selectShop = (state: rootState) => state.shop;
 
-export const selectCollections = createSelector(
+const selectCollections = createSelector(
   [selectShop],
   (shop) => shop.collections
 );

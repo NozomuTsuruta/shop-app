@@ -3,7 +3,7 @@ export type Item = {
   name: string;
   imageUrl: string;
   price: number;
-  quantity?: number|any;
+  quantity?: number | any;
 };
 
 export type Profile = {
@@ -18,4 +18,8 @@ export type ShopTypes = {
   title: string;
   routeName: string;
   items: Item[];
-}
+};
+
+export type ShopObject = {
+  [key: string]: ShopTypes
+};
