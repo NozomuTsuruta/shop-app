@@ -6,7 +6,7 @@ export const ActionTypes = {
 } as const;
 
 export type CollectionsTypes = {
-  collections: ShopObject;
+  collections: ShopObject|null;
 };
 
 interface UpdateCollectionsAction extends Action {
