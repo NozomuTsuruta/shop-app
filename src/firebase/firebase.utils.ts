@@ -45,10 +45,10 @@ export const addCollectionAndDocuments = async (
   objectsToAdd: any
 ) => {
   const collectionRef = firestore.collection(collectionKey);
-  console.log(objectsToAdd)
+  console.log(objectsToAdd);
 
   const batch = firestore.batch();
-  objectsToAdd.forEach((obj:any) => {
+  objectsToAdd.forEach((obj: any) => {
     const newDocRef = collectionRef.doc();
     batch.set(newDocRef, obj);
   });
@@ -58,23 +58,25 @@ export const addCollectionAndDocuments = async (
 
 firebase.initializeApp(config);
 
-export const convertColectionsSnapshotToMap = (collections: any)=>{
-  const transformedCollection: ShopTypes[] = collections.docs.map((doc: any)=>{
-    const {title,items}=doc.data()
+export const convertColectionsSnapshotToMap = (collections: any) => {
+  const transformedCollection: ShopTypes[] = collections.docs.map(
+    (doc: any) => {
+      const { title, items } = doc.data();
 
-    return {
-      routeName: encodeURI(title.toLowerCase()),
-      id: doc.id,
-      title,
-      items,
+      return {
+        routeName: encodeURI(title.toLowerCase()),
+        id: doc.id,
+        title,
+        items,
+      };
     }
-  })
+  );
 
-  return transformedCollection.reduce((accumulator: any,collection)=>{
-    accumulator[collection.title.toLowerCase()]=collection;
+  return transformedCollection.reduce((accumulator: any, collection) => {
+    accumulator[collection.title.toLowerCase()] = collection;
     return accumulator;
-  },{})
-}
+  }, {});
+};
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();

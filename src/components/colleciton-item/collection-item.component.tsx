@@ -22,9 +22,11 @@ const CollectionItem: FC<Props> = ({ item }) => {
         <span className='name'>{item.name}</span>
         <span className='price'>{item.price}</span>
       </div>
-      <CustomButton onClick={() => dispatch(addItem(item))} inverted>
-        Add to Cart
-      </CustomButton>
+      <div className='custom-button'>
+        <CustomButton onClick={() => dispatch(addItem(item))} inverted>
+          Add to Cart
+        </CustomButton>
+      </div>
     </div>
   );
 };
